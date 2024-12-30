@@ -15,12 +15,12 @@ Clone the repository locally, execute the following command.
 
 ```
 python Hybrid_helix_synthetica.py \
-	--protein_A "protein_example1.pdb" \
+    --protein_A "protein_example1.pdb" \
     --protein_B "protein_example2.pdb" \
     --align_num_list "7, 8, 9" \
     --protein_align_range_A "5, 15" \
     --protein_align_range_B "40, 50" \
-	--save_path "HybridHelix_Synthetica"
+    --save_path "HybridHelix_Synthetica"
 ```
 
 ## Flags
@@ -42,19 +42,19 @@ In outputs: <br>
 `sup_ca7_0.pdb` is a fusion structure, ca7 means using 7 CA atoms for alignment, and 0 means using 7 CA atoms for alignment at the first position in the alignment range; <br>
 `output.csv` records relevant indicators of the fusion structure.
 
-In `output.csv`:
-`file_index` is the index of the fused structure;
-`clash_num` is the number of conflicts between side chains within the fusion structure, with a cutoff radius of 1.5 angstroms;
-`supatom_num` is the number of CA atoms/residues used for alignment;
-`supatom_num_all` is the number of residues successfully aligned within the selected alignment range (CA atom distance between two residues is less than 0.5 angstroms);
-`min_distance` is the minimum CA atomic distance between the aligned residues;
-`min_residue1` is the name of the residue that forms the smallest inter-residue distance in protein A;
-`min_residue2` is the name of the residue that forms the smallest inter-residue distance in protein B;
-`min_residue1_index` is the index of the residue that forms the smallest inter-residue distance in protein A;
-`min_residue2_index` is the index of the residue that forms the smallest inter-residue distance in protein B;
-`ca_rmsd` is the RMSD between the CA atoms used when fusion structures are superimposed;
-`seq` is the sequence of the fusion structure;
-`seq_len` is the sequence length of the fusion structure;
+In `output.csv`: <br>
+`file_index` is the index of the fused structure; <br>
+`clash_num` is the number of conflicts between side chains within the fusion structure, with a cutoff radius of 1.5 angstroms; <br>
+`supatom_num` is the number of CA atoms/residues used for alignment; <br>
+`supatom_num_all` is the number of residues successfully aligned within the selected alignment range (CA atom distance between two residues is less than 0.5 angstroms); <br>
+`min_distance` is the minimum CA atomic distance between the aligned residues; <br>
+`min_residue1` is the name of the residue that forms the smallest inter-residue distance in protein A; <br>
+`min_residue2` is the name of the residue that forms the smallest inter-residue distance in protein B; <br>
+`min_residue1_index` is the index of the residue that forms the smallest inter-residue distance in protein A; <br>
+`min_residue2_index` is the index of the residue that forms the smallest inter-residue distance in protein B; <br>
+`ca_rmsd` is the RMSD between the CA atoms used when fusion structures are superimposed; <br>
+`seq` is the sequence of the fusion structure; <br>
+`seq_len` is the sequence length of the fusion structure; <br>
 `sup_clash_res_list` is a list of residue indices with atomic conflicts in the fusion structure.
 
 ```:test.csv
