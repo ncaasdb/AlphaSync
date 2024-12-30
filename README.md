@@ -13,7 +13,8 @@ A tool for protein fusion.
 
 Clone the repository locally, execute the following command.
 
-```python Hybrid_helix_synthetica.py \
+```
+python Hybrid_helix_synthetica.py \
 	--protein_A "protein_example1.pdb" \
     --protein_B "protein_example2.pdb" \
     --align_num_list "7, 8, 9" \
@@ -35,10 +36,10 @@ Clone the repository locally, execute the following command.
 
 Output sample is in AlphaSync_2024-12-30_20-02-25.
 
-In outputs: 
-`original_structure.pdb` is original structures of protein A and protein B; 
-`saturated_superposition_structure.pdb` is a stack of fusion structures; 
-`sup_ca7_0.pdb` is a fusion structure, ca7 means using 7 CA atoms for alignment, and 0 means using 7 CA atoms for alignment at the first position in the alignment range; 
+In outputs: <br>
+`original_structure.pdb` is original structures of protein A and protein B; <br>
+`saturated_superposition_structure.pdb` is a stack of fusion structures; <br>
+`sup_ca7_0.pdb` is a fusion structure, ca7 means using 7 CA atoms for alignment, and 0 means using 7 CA atoms for alignment at the first position in the alignment range; <br>
 `output.csv` records relevant indicators of the fusion structure.
 
 In `output.csv`:
