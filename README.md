@@ -14,7 +14,7 @@ A tool for protein fusion.
 Clone the repository locally, execute the following command.
 
 ```
-python Hybrid_helix_synthetica.py \
+python AlphaSync.py \
     --protein_A "protein_example1.pdb" \
     --protein_B "protein_example2.pdb" \
     --align_num_list "7, 8, 9" \
