@@ -34,7 +34,7 @@ python AlphaSync.py \
 
 ## Output
 
-Output sample is in AlphaSync_2024-12-30_20-02-25.
+Output sample is in AlphaSync_2025-01-03_13-06-24.
 
 In outputs: <br>
 `original_structure.pdb` is original structures of protein A and protein B; <br>
