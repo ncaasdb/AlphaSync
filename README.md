@@ -17,7 +17,7 @@ Clone the repository locally, execute the following command.
 python AlphaSync.py \
     --protein_A "protein_example1.pdb" \
     --protein_B "protein_example2.pdb" \
-    --align_num_list "7, 8, 9" \
+    --align_ResNo_list "7, 8, 9" \
     --protein_align_range_A "5, 15" \
     --protein_align_range_B "40, 50" \
     --save_path "HybridHelix_Synthetica"
@@ -27,7 +27,7 @@ python AlphaSync.py \
 
 - **`--protein_A`** : Pathway of Protein A for superposition.
 - **`--protein_B`** : Pathway of Protein B for superposition.
-- **`--align_num_list`** : The number of atoms used in the superposition. (The default is 7, 8, 9, i.e., 7, 8, and 9 atoms are used for superposition respectively)
+- **`--align_ResNo_list`** : The number of atoms used in the superposition. (The default is 7, 8, 9, i.e., 7, 8, and 9 atoms are used for superposition respectively)
 - **`--protein_align_range_A`** : The residue range of protein A to be superimposed. (The default parameter is 5, 15, i.e. residues 5-15 will be superimposed. Note that only two numbers are allowed here to define the start and end residues)
 - **`--protein_align_range_B`** : The residue range of protein B to be superimposed.
 - **`--save_path`** : Path for saving the superposition results.
@@ -55,13 +55,14 @@ In `output.csv`: <br>
 `ca_rmsd` is the RMSD between the CA atoms used when fusion structures are superimposed; <br>
 `seq` is the sequence of the fusion structure; <br>
 `seq_len` is the sequence length of the fusion structure; <br>
-`sup_clash_res_list` is a list of residue indices with atomic conflicts in the fusion structure.
+`sup_clash_res_list` is a list of residue indices with atomic conflicts in the fusion structure. <br>
+`clash_res_len` is the length of clash residue list. <br>
 
 ```:test.csv
-file_index,clash_num,supatom_num,supatom_num_all,min_distance,min_residue1,min_residue2,min_residue1_index,min_residue2_index,ca_rmsd,seq,seq_len,sup_clash_res_list
-7_0,8,7,8,0.054805804,MET,LYS,10,45,0.13137935,TIDQWLLKNAKEDAIAELKKAGITSDFYFNAINKAKTVEGVNALMRAAHEIRWLPNLTFDQRVAFIHKLEDDPSQSSELLSEAKKLNDSQAPK,93,"[14, 23, 27, 28, 31, 44, 52, 66, 67, 70]"
-7_1,26,7,9,0.07894572,TRP,LYS,9,45,0.16165167,TIDQWLLKNAKEDAIAELKKAGITSDFYFNAINKAKTVEGVNALWMRAAHEIRWLPNLTFDQRVAFIHKLEDDPSQSSELLSEAKKLNDSQAPK,94,"[14, 15, 16, 17, 18, 19, 20, 21, 23, 24, 28, 29, 30, 31, 32, 33, 52, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 80, 81, 83]"
-7_2,6,7,9,0.06367334,LYS,LEU,7,44,0.12121701,TIDQWLLKNAKEDAIAELKKAGITSDFYFNAINKAKTVEGVNAKEWMRAAHEIRWLPNLTFDQRVAFIHKLEDDPSQSSELLSEAKKLNDSQAPK,95,"[14, 17, 21, 23, 28, 31, 44, 45, 48, 52, 79, 82]"
+file_index,clash_num,supatom_num,supatom_num_all,min_distance,min_residue1,min_residue2,min_residue1_index,min_residue2_index,ca_rmsd,seq,seq_len,sup_clash_res_list,clash_res_len
+7_0,8,7,8,0.054805804044008255,MET,LYS,10,45,0.13137935101985931,TIDQWLLKNAKEDAIAELKKAGITSDFYFNAINKAKTVEGVNALMRAAHEIRWLPNLTFDQRVAFIHKLEDDPSQSSELLSEAKKLNDSQAPK,93,"[27, 28, 66, 67]",4
+7_1,26,7,9,0.07894571870565414,TRP,LYS,9,45,0.16165167093276978,TIDQWLLKNAKEDAIAELKKAGITSDFYFNAINKAKTVEGVNALWMRAAHEIRWLPNLTFDQRVAFIHKLEDDPSQSSELLSEAKKLNDSQAPK,94,"[14, 15, 16, 17, 18, 20, 21, 24, 28, 29, 67, 68, 69, 70, 71, 72, 73, 74, 76, 80, 81]",21
+7_2,6,7,9,0.06367333978414536,LYS,LEU,7,44,0.12121701240539551,TIDQWLLKNAKEDAIAELKKAGITSDFYFNAINKAKTVEGVNAKEWMRAAHEIRWLPNLTFDQRVAFIHKLEDDPSQSSELLSEAKKLNDSQAPK,95,"[14, 17, 21, 23, 31, 44, 45, 52, 79, 82]",10
 ```
 
 ## Note

@@ -55,8 +55,8 @@ def main():
     protein_save(protein_file1, protein_file2, sup_path, deep_structure_list)
 
     file_index_output, supatom_num_list_output, clash_num_list_output, supatom_num_all_list_output, min_distance_list_output, min_residue1_list_output, \
-        min_residue2_list_output, min_residue1_index_list_output, min_residue2_index_list_output, ca_rmsd_list_output, seq_list_output, seq_len_list_output, sup_clash_res_list_output = \
-        [], [], [], [], [], [], [], [], [], [], [], [], []
+        min_residue2_list_output, min_residue1_index_list_output, min_residue2_index_list_output, ca_rmsd_list_output, seq_list_output, seq_len_list_output, sup_clash_res_list_output, clash_res_len_list = \
+        [], [], [], [], [], [], [], [], [], [], [], [], [], []
     key_residue_dict, key_residue_dict_cores = {}, {}
     for an in align_num_list:
         new_structure_list, structure2, supatom_num_list, supatom_num_all_list, min_distance_list, min_residue1_list,\
@@ -118,8 +118,9 @@ def main():
             seq_len_list_output.append(len(seq_now))
 
             print(f"New coordinates have been saved to {sup_path}/sup_ca{an}_{i}.pdb" + "\n")
-            sup_clash_res_list = residue_clash_check(f"{sup_path}/sup_ca{an}_{i}.pdb", key_residue_index_cat, cutoff=1.5, clash_threshold=5)
+            sup_clash_res_list = residue_clash_check(f"{sup_path}/sup_ca{an}_{i}.pdb", key_residue_index_cat, cutoff=1.5, clash_threshold=0)
             sup_clash_res_list_output.append(str(sup_clash_res_list))
+            clash_res_len_list.append(len(sup_clash_res_list))
 
             file_index_output.append(str(an) + '_' + str(i))
 
@@ -145,7 +146,8 @@ def main():
                    'supatom_num_all': supatom_num_all_list_output, 'min_distance': min_distance_list_output,
                    'min_residue1': min_residue1_list_output, 'min_residue2': min_residue2_list_output,
                    'min_residue1_index': min_residue1_index_list_output, 'min_residue2_index': min_residue2_index_list_output,
-                   'ca_rmsd': ca_rmsd_list_output, 'seq': seq_list_output, 'seq_len': seq_len_list_output, 'sup_clash_res_list': sup_clash_res_list_output}
+                   'ca_rmsd': ca_rmsd_list_output, 'seq': seq_list_output, 'seq_len': seq_len_list_output,
+                   'sup_clash_res_list': sup_clash_res_list_output, 'clash_res_len': clash_res_len_list}
     df_output = pd.DataFrame(dict_output)
     df_output.to_csv(f'{sup_path}/output.csv', index=False)
     # with open(f'{sup_path}/key_residue_dict.pkl', 'wb') as file:

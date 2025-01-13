@@ -114,24 +114,20 @@ def get_clash_num(structure1, structure2, cutoff=1.5):
 def get_intrastructure_clash_num(structure, cutoff=1.5):
     clash_num = 0
     # Get lists of all atoms
-    atoms = Selection.unfold_entities(structure, 'A')  # 'A' represents atoms
+    atoms = [atom for atom in structure.get_atoms() if not atom.element == 'H' and atom.get_name() not in ['N', 'CA', 'C', 'O']]
 
-    # Filter out hydrogen atoms and main chain atoms (N, CA, C, O)
-    atoms = [atom for atom in atoms if atom.element != 'H' and atom.get_name() not in ['N', 'CA', 'C', 'O']]
-
-    # Create NeighborSearch object
     ns = NeighborSearch(atoms)
 
-    for atom in atoms:
-        close_atoms = ns.search(atom.get_coord(), cutoff, level='A')
-        # Remove self-comparison results
-        close_atoms = [a for a in close_atoms if a != atom]
-
-        # Further filter to exclude atoms from the same residue
-        close_atoms = [a for a in close_atoms if a.get_parent() != atom.get_parent()]
-
-        if close_atoms:
-            clash_num += len(close_atoms)
+    for model in structure:
+        for chain in model:
+            for residue in chain:
+                sidechain_atoms = [atom for atom in residue if atom.get_name() not in ['N', 'CA', 'C', 'O'] and not atom.element == 'H']
+                for atom in sidechain_atoms:
+                    neighbors = ns.search(atom.coord, cutoff)
+                    # Exclude atoms within the same residue and main chain atoms
+                    external_neighbors = [neigh for neigh in neighbors if
+                                          not neigh.parent.id == atom.parent.id]
+                    clash_num += len(external_neighbors)
 
     return clash_num // 2
 
@@ -147,11 +143,11 @@ def get_residue_clash_num(structure, cutoff=1.5, clash_threshold=0):
             for residue in chain:
                 conflict_atoms = 0
                 # Only check side chain atoms for each residue
-                sidechain_atoms = [atom for atom in residue if atom.get_name() not in ['N', 'CA', 'C', 'O']]
+                sidechain_atoms = [atom for atom in residue if atom.get_name() not in ['N', 'CA', 'C', 'O'] and not atom.element == 'H']
                 for atom in sidechain_atoms:
                     neighbors = ns.search(atom.coord, cutoff)
                     # Exclude atoms within the same residue and main chain atoms
-                    external_neighbors = [neigh for neigh in neighbors if not neigh.parent.id == atom.parent.id and neigh.get_name() not in ['N', 'CA', 'C', 'O']]
+                    external_neighbors = [neigh for neigh in neighbors if not neigh.parent.id == atom.parent.id]
                     conflict_atoms += len(external_neighbors)
                 # Use the clash_threshold to determine if there is a clash
                 if conflict_atoms > clash_threshold:
@@ -162,7 +158,7 @@ def get_residue_clash_num(structure, cutoff=1.5, clash_threshold=0):
 def residue_clash_check(pfile, key_residue_index_cat, cutoff=1.5, clash_threshold=0):
     parser = PDBParser(QUIET=True)
     structure = parser.get_structure('protein', pfile)
-    clash_res_id = get_residue_clash_num(structure, cutoff=1.5, clash_threshold=0)
+    clash_res_id = get_residue_clash_num(structure, cutoff=1.5, clash_threshold=clash_threshold)
     print(f"Conflicting residues in {pfile}:", clash_res_id, '\n')
     key_clash_res_id = [i for i in clash_res_id if i in key_residue_index_cat]
     if len(key_clash_res_id) != 0:
