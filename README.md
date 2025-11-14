@@ -1,4 +1,4 @@
-# Hybrid helix synthetica 
+# AlphaSync
 
 A tool for protein fusion.
 
@@ -25,9 +25,9 @@ python AlphaSync.py \
 
 ## Flags
 
-- **`--protein_A`** : Pathway of Protein A for superposition.
-- **`--protein_B`** : Pathway of Protein B for superposition.
-- **`--align_ResNo_list`** : The number of atoms used in the superposition. (The default is 7, 8, 9, i.e., 7, 8, and 9 atoms are used for superposition respectively)
+- **`--protein_A`** : Path of Protein A for superposition.
+- **`--protein_B`** : Path of Protein B for superposition.
+- **`--align_ResNo_list`** : The number of residues (CA atoms) used in the superposition. (The default is 7, 8, 9, i.e., 7, 8, and 9 CA atoms are used for superposition respectively)
 - **`--protein_align_range_A`** : The residue range of protein A to be superimposed. (The default parameter is 5, 15, i.e. residues 5-15 will be superimposed. Note that only two numbers are allowed here to define the start and end residues)
 - **`--protein_align_range_B`** : The residue range of protein B to be superimposed.
 - **`--save_path`** : Path for saving the superposition results.
@@ -46,7 +46,7 @@ In `output.csv`: <br>
 `file_index` is the index of the fused structure; <br>
 `clash_num` is the number of conflicts between side chains within the fusion structure, with a cutoff radius of 1.5 angstroms; <br>
 `supatom_num` is the number of CA atoms/residues used for alignment; <br>
-`supatom_num_all` is the number of residues successfully aligned within the selected alignment range (CA atom distance between two residues is less than 0.5 angstroms); <br>
+`supatom_num_all` is the number of residues (CA atoms) successfully aligned within the selected alignment range (CA atom distance between two residues is less than 0.5 angstroms); <br>
 `min_distance` is the minimum CA atomic distance between the aligned residues; <br>
 `min_residue1` is the name of the residue that forms the smallest inter-residue distance in protein A; <br>
 `min_residue2` is the name of the residue that forms the smallest inter-residue distance in protein B; <br>
