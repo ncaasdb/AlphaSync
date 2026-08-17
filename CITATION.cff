@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use AlphaSync, please cite this software."
+title: "AlphaSync"
+type: software
+version: 1.0.0
+abstract: "AlphaSync is a computational framework for geometry-guided, linker-free protein fusion through alpha-helix sharing."
+authors:
+  - family-names: "Wang"
+    given-names: "Junqing"
+    affiliation: "School of Pharmaceutical Sciences,Sun Yat-Sen University"
+    orcid: "https://orcid.org/0000-0002-9091-9891"
+keywords:
+  - protein engineering
+  - protein fusion
+  - alpha helix
+  - bispecific proteins
+  - computational protein design
